@@ -52,6 +52,9 @@
     <script src="{{ asset('backend/assets/js/scripts.bundle.js') }}"></script>
     <script src="{{ asset('backend/assets/plugins/custom/datatables/datatables.bundle.js') }}"></script>
     <script src="{{ asset('backend/assets/js/custom/apps/ecommerce/catalog/categories.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/custom/apps/user-management/users/list/table.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/custom/apps/user-management/users/list/export-users.js') }}"></script>
+    <script src="{{ asset('backend/assets/js/custom/apps/user-management/users/list/add.js') }}"></script>
     <script src="{{ asset('backend/assets/plugins/custom/vis-timeline/vis-timeline.bundle.js') }}"></script>
     <script src="{{ asset('backend/assets/js/widgets.bundle.js') }}"></script>
     <script src="{{ asset('backend/assets/js/custom/widgets.js') }}"></script>

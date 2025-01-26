@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'isAdmin',
+        'profile_photo',
     ];
 
     /**
@@ -44,12 +45,26 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'isAdmin' => 'boolean',
         ];
+
+    }
+
+    public function getRoleAttribute()
+    {
+        return $this->isAdmin ? 'Admin' : 'User';
     }
 
     public function getIsAdminAttribute()
     {
         return $this->attributes['isAdmin'];
+    }
+
+    public function getProfileImageAttribute()
+    {
+        return $this->attributes['profile_image']
+            ? asset('storage/' . $this->attributes['profile_image'])
+            : asset('backend/assets/media/avatars/blank.png');
     }
 
 }

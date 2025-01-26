@@ -74,7 +74,7 @@ License: For each use you must have a valid license purchased only from above li
                                 </span>
                             @enderror
                         </div>
-                        <div class="fv-row mb-10">
+                        {{-- <div class="fv-row mb-10">
                             <div class="d-flex flex-stack mb-2">
                                 <label class="form-label fw-bolder text-dark fs-6 mb-0">Password</label>
                                 <a href="#" class="link-primary fs-6 fw-bolder">Forgot Password?</a>
@@ -88,6 +88,33 @@ License: For each use you must have a valid license purchased only from above li
                                     <strong>{{ $message }}</strong>
                                 </span>
                             @enderror
+                        </div> --}}
+                        <div class="mb-10 fv-row" data-kt-password-meter="true">
+                            <!--begin::Wrapper-->
+                            <div class="mb-1">
+                                <!--begin::Label-->
+                                <label class="form-label fw-bolder text-dark fs-6">Password</label>
+                                <!--end::Label-->
+                                <!--begin::Input wrapper-->
+                                <div class="position-relative mb-3">
+                                    <input id="password" type="password"
+                                        class="form-control form-control-lg form-control-solid @error('password') is-invalid @enderror"
+                                        name="password" required autocomplete="new-password" placeholder="Insert Password Here">
+                                    @error('password')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                    <span
+                                        class="btn btn-sm btn-icon position-absolute translate-middle top-50 end-0 me-n2"
+                                        data-kt-password-meter-control="visibility">
+                                        <i class="bi bi-eye-slash fs-2"></i>
+                                        <i class="bi bi-eye fs-2 d-none"></i>
+                                    </span>
+                                </div>
+                                <!--end::Input wrapper-->
+                            </div>
+                            <!--end::Wrapper-->
                         </div>
                         <div class="text-center">
                             <button type="submit" id="kt_sign_in_submit" class="btn btn-lg btn-primary w-100 mb-5">
