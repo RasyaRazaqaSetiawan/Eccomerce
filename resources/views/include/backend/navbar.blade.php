@@ -1,4 +1,3 @@
-
 <div id="kt_header" style="" class="header align-items-stretch">
     <div class="container-fluid d-flex align-items-stretch justify-content-between">
         <div class="d-flex align-items-center d-lg-none ms-n2 me-2" title="Show aside menu">
@@ -56,8 +55,12 @@
                             <a href="../../demo1/dist/account/overview.html" class="menu-link px-5">My Profile</a>
                         </div>
                         <div class="menu-item px-5">
-                            <a href="../../demo1/dist/authentication/flows/basic/sign-in.html"
+                            <a href="{{ route('logout') }}"
+                                onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                 class="menu-link px-5">Sign Out</a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
                         </div>
                         <div class="separator my-2"></div>
                     </div>

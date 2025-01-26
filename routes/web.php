@@ -2,19 +2,19 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CategoryController;
 use App\Http\Middleware\IsAdmin;
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-// Route Admin(Backend)
+// Rute untuk Dashboard Admin
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', IsAdmin::class]], function () {
-    Route::get('/', function () {
-        return view('home');
-    });
-    // untuk Route Backend Lainnya
+    Route::get('/dashboard', function () {
+        return view('backend.dashboard'); // Pastikan file ini ada di resources/views/backend/dashboard.blade.php
+    })->name('admin.dashboard');
+
+    Route::resource('categories', CategoryController::class);
 });
 
-
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/', function () {
     return view('welcome');
 });
