@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Middleware\IsAdmin;
 
 // Rute untuk Dashboard Admin
@@ -12,6 +13,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', IsAdmin::class]], fu
         return view('backend.dashboard'); // Pastikan file ini ada di resources/views/backend/dashboard.blade.php
     })->name('admin.dashboard');
 
+    Route::resource('products', ProductController::class);
     Route::resource('categories', CategoryController::class);
     Route::resource('users', UserController::class);
 });

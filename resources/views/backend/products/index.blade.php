@@ -1,11 +1,12 @@
 @extends('layouts.backend')
-
 @section('content')
     <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
         <div class="toolbar" id="kt_toolbar">
             <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
-                <div class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
-                    <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">Categories</h1>
+                <div data-kt-swapper="true" data-kt-swapper-mode="prepend"
+                    data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
+                    class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+                    <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">Products</h1>
                     <span class="h-20px border-gray-300 border-start mx-4"></span>
                     <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                         <li class="breadcrumb-item text-muted">
@@ -14,7 +15,7 @@
                         <li class="breadcrumb-item">
                             <span class="bullet bg-gray-300 w-5px h-2px"></span>
                         </li>
-                        <li class="breadcrumb-item text-dark">Categories</li>
+                        <li class="breadcrumb-item text-dark">Products</li>
                     </ul>
                 </div>
             </div>
@@ -35,14 +36,14 @@
                                             fill="currentColor" />
                                     </svg>
                                 </span>
-                                <input type="text" data-kt-ecommerce-category-filter="search"
-                                    class="form-control form-control-solid w-250px ps-14" placeholder="Search Category" />
+                                <input type="text" data-kt-ecommerce-product-filter="search"
+                                    class="form-control form-control-solid w-250px ps-14" placeholder="Search Product" />
                             </div>
                         </div>
                         <div class="card-toolbar">
                             <div class="d-flex justify-content-end" data-kt-user-table-toolbar="base">
-                                <!-- Tombol Add Category -->
-                                <a href="{{ route('categories.create') }}" class="btn btn-primary">
+                                <!-- Tombol Add Product -->
+                                <a href="{{ route('products.create') }}" class="btn btn-primary">
                                     <span class="svg-icon svg-icon-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                             viewBox="0 0 24 24" fill="none">
@@ -52,36 +53,60 @@
                                                 fill="currentColor" />
                                         </svg>
                                     </span>
-                                    Add Category
+                                    Add Product
                                 </a>
                             </div>
                         </div>
                     </div>
-                    <div class="card-body pt-0">
-                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_category_table">
+                    <div class="card-body pt-3">
+                        <table class="table align-middle table-row-dashed fs-6 gy-5" id="kt_ecommerce_products_table"
+                            style="margin-top: 20px;">
                             <thead>
                                 <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
-                                    <th class="w-100px">Id</th>
+                                    <th class="min-w-50px">Id</th>
+                                    <th class="min-w-100px">Product</th>
+                                    <th class="min-w-100px">Qty</th>
+                                    <th class="min-w-100px">Price</th>
                                     <th class="min-w-100px">Category</th>
-                                    <th class="min-w-100px">Slug</th>
                                     <th class="min-w-100px">Actions</th>
                                 </tr>
                             </thead>
                             <tbody class="fw-bold text-gray-600">
-                                @forelse($categories as $category)
+                                @foreach ($products as $product)
                                     <tr>
-                                        <td class="text-gray-800 fs-5 fw-bolder mb-1">{{ $loop->index + 1 }}</td>
+                                        <td>{{ $loop->index + 1 }}</td>
                                         <td>
-                                            <a href="{{ route('categories.edit', $category->id) }}"
-                                                class="text-gray-800 text-hover-primary fs-5 fw-bolder mb-1">{{ $category->name }}</a>
+                                            <div class="d-flex align-items-center">
+                                                <a href="{{ route('products.edit', $product->id) }}"
+                                                    class="symbol symbol-50px">
+                                                    <span class="symbol-label"
+                                                        style="background-image:url({{ isset($product->image) ? asset('storage/' . $product->image) : asset('backend/assets/media/svg/files/blank-image.svg') }});">
+                                                    </span>
+                                                </a>
+                                                <div class="ms-5">
+                                                    <a href="{{ route('products.edit', $product->id) }}"
+                                                        class="text-gray-800 text-hover-primary fs-5 fw-bolder"
+                                                        data-kt-ecommerce-product-filter="product_name">{{ $product->name }}</a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="pe-0" data-order="2">
+                                            @if ($product->stock < 10)
+                                                <span class="badge badge-light-warning">Low stock</span>
+                                            @endif
+                                            <span class="fw-bolder text-warning ms-3">{{ $product->stock }}</span>
+                                        </td>
+                                        <td class="pe-0">
+                                            <span class="fw-bolder text-dark">Rp.
+                                                {{ number_format($product->price, 0, ',', '.') }}</span>
+                                        </td>
+                                        <td class="pe-0" data-order="Scheduled">
+                                            <div class="badge badge-light-success">{{ $product->category->name }}</div>
                                         </td>
                                         <td>
-                                            <div class="badge badge-light-success">{{ $category->slug }}</div>
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('categories.edit', $category->id) }}"
+                                            <a href="{{ route('products.edit', $product->id) }}"
                                                 class="btn btn-sm btn-warning">Edit</a>
-                                            <form action="{{ route('categories.destroy', $category->id) }}" method="POST"
+                                            <form action="{{ route('products.destroy', $product->id) }}" method="POST"
                                                 class="d-inline">
                                                 @csrf
                                                 @method('DELETE')
@@ -90,11 +115,7 @@
                                             </form>
                                         </td>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="4" class="text-center">No categories found</td>
-                                    </tr>
-                                @endforelse
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

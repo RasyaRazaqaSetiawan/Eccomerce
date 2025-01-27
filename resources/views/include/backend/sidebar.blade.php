@@ -81,8 +81,8 @@
                     </a>
                 </div>
                 <div class="menu-item">
-                    <a class="menu-link {{ request()->routeIs('categories.index') ? 'active' : '' }}"
-                        href="{{ route('categories.index') }}">
+                    <a class="menu-link {{ request()->routeIs('products.index') ? 'active' : '' }}"
+                        href="{{ route('products.index') }}">
                         <span class="menu-icon">
                             <span class="svg-icon svg-icon-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
