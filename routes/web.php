@@ -7,8 +7,23 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Middleware\IsAdmin;
 
-// Rute untuk Dashboard Admin
-Route::group(['prefix' => 'admin', 'middleware' => ['auth', IsAdmin::class]], function () {
+// Auth Routes
+Auth::routes();
+
+// Route untuk Guest (Pengunjung) - Belum Login
+Route::middleware('guest')->group(function () {
+    Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');
+    Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+    Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+});
+
+// Route untuk User yang Sudah Login
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
+
+// Route untuk Admin dengan Middleware
+Route::prefix('admin')->middleware(['auth', IsAdmin::class])->group(function () {
     Route::get('/dashboard', function () {
         return view('backend.dashboard'); // Pastikan file ini ada di resources/views/backend/dashboard.blade.php
     })->name('admin.dashboard');
@@ -17,11 +32,3 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', IsAdmin::class]], fu
     Route::resource('categories', CategoryController::class);
     Route::resource('users', UserController::class);
 });
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();
-
