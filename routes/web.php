@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\DetailController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');
     Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
     Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
+    Route::get('/detail/{category_slug}/{product_slug}', [DetailController::class, 'show'])->name('detail');
 });
 
 // Route untuk User yang Sudah Login

@@ -28,19 +28,18 @@
                     <div class="align-self-center">
                         <div class="header-logo">
                             <a href="{{ url('/') }}">
-                                <img src="frontend/assets/images/logo/logo.png" alt="Site Logo" />
-                                <img class="dark-logo" src="frontend/assets/images/logo/dark-logo.png" alt="Site Logo" style="display: none;" />
+                                <img src="{{ asset('frontend/assets/images/logo/logo.png') }}" alt="Site Logo" />
+                                <img class="dark-logo" src="{{ asset('frontend/assets/images/logo/dark-logo.png') }}" alt="Site Logo" style="display: none;" />
                             </a>
                         </div>
                     </div>
-
 
                     <div class="align-self-center">
                         <div class="header-search">
                             <form class="ec-btn-group-form" action="#">
                                 <input class="form-control ec-search-bar" placeholder="Search products..." type="text" />
                                 <button class="submit" type="submit">
-                                    <img src="frontend/assets/images/icons/search.svg" class="svg_img header_svg" alt="" />
+                                    <img src="{{ asset('frontend/assets/images/icons/search.svg') }}" class="svg_img header_svg" alt="" />
                                 </button>
                             </form>
                         </div>
@@ -50,7 +49,7 @@
                         <div class="ec-header-bottons">
                             <div class="ec-header-user dropdown">
                                 <button class="dropdown-toggle" data-bs-toggle="dropdown">
-                                    <img src="frontend/assets/images/icons/user.svg" class="svg_img header_svg" alt="User" />
+                                    <img src="{{ asset('frontend/assets/images/icons/user.svg') }}" class="svg_img header_svg" alt="User" />
                                 </button>
                                 <ul class="dropdown-menu dropdown-menu-right">
                                     @guest
@@ -76,14 +75,14 @@
 
                             <a href="wishlist.html" class="ec-header-btn ec-header-wishlist">
                                 <div class="header-icon">
-                                    <img src="frontend/assets/images/icons/wishlist.svg" class="svg_img header_svg" alt="Wishlist" />
+                                    <img src="{{ asset('frontend/assets/images/icons/wishlist.svg') }}" class="svg_img header_svg" alt="Wishlist" />
                                 </div>
                                 <span class="ec-header-count">4</span>
                             </a>
 
                             <a href="#ec-side-cart" class="ec-header-btn ec-side-toggle">
                                 <div class="header-icon">
-                                    <img src="frontend/assets/images/icons/cart.svg" class="svg_img header_svg" alt="Cart" />
+                                    <img src="{{ asset('frontend/assets/images/icons/cart.svg') }}" class="svg_img header_svg" alt="Cart" />
                                 </div>
                                 <span class="ec-header-count cart-count-lable">3</span>
                             </a>

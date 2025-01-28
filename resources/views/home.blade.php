@@ -108,7 +108,7 @@
                                             </div>
                                         </div>
                                         <div class="ec-pro-content">
-                                            <h5 class="ec-pro-title"><a href="product-left-sidebar.html">{{ $item->name }}</a></h5>
+                                            <h5 class="ec-pro-title"><a href="{{ route('detail', ['category_slug' => $item->category->slug, 'product_slug' => $item->slug]) }}" class="image">{{ $item->name }}</a></h5>
                                             <div class="ec-pro-rating">
                                                 <i class="ecicon eci-star fill"></i>
                                                 <i class="ecicon eci-star fill"></i>
@@ -174,7 +174,7 @@
                                                         src="frontend/assets/images/product-image/6_2.jpg" alt="Product" />
                                                 </a>
                                                 <span class="percentage">20%</span>
-                                                <a href="#" class="quickview" data-link-action="quickview"
+                                                <a href="{{ route('detail', ['category_slug' => $item->category->slug, 'product_slug' => $item->slug]) }}" class="quickview" data-link-action="quickview"
                                                     title="Quick view" data-bs-toggle="modal"
                                                     data-bs-target="#ec_quickview_modal"><img
                                                         src="frontend/assets/images/icons/quickview.svg" class="svg_img pro_svg"

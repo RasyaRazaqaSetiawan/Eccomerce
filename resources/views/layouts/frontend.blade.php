@@ -26,42 +26,44 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/jquery-ui.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/countdownTimer.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/slick.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/nouislider.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/bootstrap.css') }}" />
 
     <!-- Main Style -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/demo1.css') }}" />
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/responsive.css') }}" />
 
     <!-- Background css -->
-    <link rel="stylesheet" id="bg-switcher-css" href="frontend/assets/css/backgrounds/bg-4.css">
+    <link rel="stylesheet" id="bg-switcher-css" href="{{ asset('frontend/assets/css/backgrounds/bg-4.css') }}">
 </head>
 
 <body>
     <div id="ec-overlay"><span class="loader_img"></span></div>
+
     <!-- Header start  -->
     @include('include.frontend.navbar')
     <!-- Header End  -->
 
-    <!-- Footer Start -->
+    <!-- Content Area Start -->
     @yield('content')
-    <!-- Footer Area End -->
+    <!-- Content Area End -->
 
     <!-- Footer Start -->
     @include('include.frontend.footer')
     <!-- Footer Area End -->
 
-    <!-- Recent Purchase Popup  -->
-    <div class="recent-purchase">
-        <img src="frontend/assets/images/product-image/1.jpg" alt="payment image">
+    <!-- Recent Purchase Popup -->
+    {{-- <div class="recent-purchase">
+        <img src="{{ asset('frontend/assets/images/product-image/1.jpg') }}" alt="payment image">
         <div class="detail">
             <p>Someone in new just bought</p>
             <h6>stylish baby shoes</h6>
             <p>10 Minutes ago</p>
         </div>
         <a href="javascript:void(0)" class="icon-btn recent-close">×</a>
-    </div>
+    </div> --}}
     <!-- Recent Purchase Popup end -->
-
 
     <!-- Whatsapp -->
     <div class="ec-style ec-right-bottom">
@@ -69,7 +71,8 @@
         <div class="ec-right-bottom">
             <div class="ec-box">
                 <div class="ec-button rotateBackward">
-                    <img class="whatsapp" src="frontend/assets/images/common/whatsapp.png" alt="whatsapp icon">
+                    <img class="whatsapp" src="{{ asset('frontend/assets/images/common/whatsapp.png') }}"
+                        alt="whatsapp icon">
                 </div>
             </div>
         </div>
