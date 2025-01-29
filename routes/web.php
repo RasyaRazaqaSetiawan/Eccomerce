@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\DetailController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -16,12 +17,18 @@ Route::middleware('guest')->group(function () {
     Route::get('/', [App\Http\Controllers\WelcomeController::class, 'index'])->name('welcome');
     Route::get('/login', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
     Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('register');
-    Route::get('/detail/{category_slug}/{product_slug}', [DetailController::class, 'show'])->name('detail');
 });
+
+// Route untuk Semua Pengguna (baik Guest maupun yang sudah Login)
+Route::get('/detail/{category_slug}/{product_slug}', [DetailController::class, 'show'])->name('detail');
 
 // Route untuk User yang Sudah Login
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/cart/{product_id}', [CartController::class, 'store'])->name('cart.store');
+    Route::put('/cart', [CartController::class, 'update'])->name('cart.update');
+    Route::delete('/cart/{cart_id}', [CartController::class, 'destroy'])->name('cart.destroy');
 });
 
 // Route untuk Admin dengan Middleware

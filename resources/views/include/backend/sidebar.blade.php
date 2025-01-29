@@ -135,7 +135,7 @@
                             </span>
                         </span>
 
-                        <span class="menu-title">Aside</span>
+                        <span class="menu-title">Contoh</span>
                         <span class="menu-arrow"></span>
                     </span>
                     <div class="menu-sub menu-sub-accordion menu-active-bg">
@@ -144,7 +144,7 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Light Skin</span>
+                                <span class="menu-title">Contoh</span>
                             </a>
                         </div>
                         <div class="menu-item">
@@ -152,7 +152,7 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Font Icons</span>
+                                <span class="menu-title">Contoh</span>
                             </a>
                         </div>
                         <div class="menu-item">
@@ -160,7 +160,7 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Minimized</span>
+                                <span class="menu-title">Contoh</span>
                             </a>
                         </div>
                         <div class="menu-item">
@@ -168,7 +168,7 @@
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
-                                <span class="menu-title">Only Header</span>
+                                <span class="menu-title">Contoh</span>
                             </a>
                         </div>
                     </div>
@@ -190,7 +190,7 @@
                                 </svg>
                             </span>
                         </span>
-                        <span class="menu-title">Layout Builder</span>
+                        <span class="menu-title">Contoh</span>
                     </a>
                 </div>
                 <div class="menu-item">
@@ -213,7 +213,7 @@
                                 </svg>
                             </span>
                         </span>
-                        <span class="menu-title">Changelog v8.0.38</span>
+                        <span class="menu-title">Contoh</span>
                     </a>
                 </div>
             </div>
