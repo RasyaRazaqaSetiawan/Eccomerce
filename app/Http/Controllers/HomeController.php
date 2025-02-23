@@ -24,15 +24,23 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+    // public function index()
+    // {
+    //     $user = Auth::user();
+    //     if ($user->is_admin == 1) {
+    //         // return view('backend.dashboard');
+    //         return redirect()->route('admin.dashboard'); // Redirect ke admin dashboard
+    //     } else {
+    //         $categories = Category::all();
+    //         $product = Product::all();
+    //         return view('home', compact('categories', 'product'));
+    //     }
+    // }
     public function index()
     {
-        $user = Auth::user();
-        if ($user->is_admin == 1) {
-            return view('backend.dashboard');
-        } else {
-            $categories = Category::all();
-            $product = Product::all(); 
-            return view('home', compact('categories', 'product'));
-        }
+        $categories = Category::all();
+        $product = Product::all();
+        return view('home', compact('categories', 'product'));
     }
+
 }

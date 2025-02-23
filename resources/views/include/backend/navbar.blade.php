@@ -55,6 +55,9 @@
                             <a href="../../demo1/dist/account/overview.html" class="menu-link px-5">My Profile</a>
                         </div>
                         <div class="menu-item px-5">
+                            <a href="{{ route('home') }}" class="menu-link px-5">User Page</a>
+                        </div>
+                        <div class="menu-item px-5">
                             <a href="{{ route('logout') }}"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();"
                                 class="menu-link px-5">Sign Out</a>

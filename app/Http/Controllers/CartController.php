@@ -76,15 +76,14 @@ class CartController extends Controller
     }
     
 
-    public function destroy($cart_id)
+    public function destroy($id)
     {
-        $cart = Cart::findOrFail($cart_id);
+        $cart = Cart::where('id', $id)->where('user_id', Auth::id())->firstOrFail();
         $cart->delete();
-        
-        // Update cart count in session
+    
         $cart_count = Cart::where('user_id', Auth::id())->count();
         session(['cart_count' => $cart_count]);
-        
+    
         return redirect()->route('cart.index')->with('success', 'Item removed from cart successfully.');
     }
 }

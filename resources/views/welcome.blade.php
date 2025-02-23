@@ -90,18 +90,23 @@
                                                             alt="{{ $item->name }}" />
                                                     </a>
                                                     <span class="percentage">20%</span>
-                                                    <a href="{{ route('detail', ['category_slug' => $item->category->slug, 'product_slug' => $item->slug]) }}"
-                                                        class="quickview" title="Quick view">
-                                                        <img src="frontend/assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" />
-                                                    </a>
+                                                    @if (isset($item) && isset($item->category))
+                                                        <a href="{{ route('detail', ['category_slug' => $item->category->slug, 'product_slug' => $item->slug]) }}"
+                                                            class="quickview" title="Quick view">
+                                                        </a>
+                                                    @else
+                                                        <p class="text-gray-500">Tidak ada data tersedia.</p>
+                                                    @endif
                                                     <div class="ec-pro-actions">
                                                         <a href="compare.html" class="ec-btn-group compare"
                                                             title="Compare"><img
                                                                 src="frontend/assets/images/icons/compare.svg"
                                                                 class="svg_img pro_svg" alt="" /></a>
-                                                                <button title="Add To Cart" class="add-to-cart" data-product-id="{{ $item->id }}">
-                                                                    <img src="frontend/assets/images/icons/cart.svg" class="svg_img pro_svg" alt="" /> Add To Cart
-                                                                </button>
+                                                        <button title="Add To Cart" class="add-to-cart"
+                                                            data-product-id="{{ $item->id }}">
+                                                            <img src="frontend/assets/images/icons/cart.svg"
+                                                                class="svg_img pro_svg" alt="" /> Add To Cart
+                                                        </button>
                                                         <a class="ec-btn-group wishlist" title="Wishlist"><img
                                                                 src="frontend/assets/images/icons/wishlist.svg"
                                                                 class="svg_img pro_svg" alt="" /></a>
@@ -109,9 +114,14 @@
                                                 </div>
                                             </div>
                                             <div class="ec-pro-content">
-                                                <h5 class="ec-pro-title"><a
-                                                        href="{{ route('detail', ['category_slug' => $item->category->slug, 'product_slug' => $item->slug]) }}"
-                                                        class="image">{{ $item->name }}</a></h5>
+                                                @if (isset($item) && isset($item->category))
+                                                    <h5 class="ec-pro-title">
+                                                        <a href="{{ route('detail', ['category_slug' => $item->category->slug, 'product_slug' => $item->slug]) }}"
+                                                            class="image">{{ $item->name }}</a>
+                                                    </h5>
+                                                @else
+                                                    <h5 class="ec-pro-title text-gray-500">Produk tidak tersedia</h5>
+                                                @endif
                                                 <div class="ec-pro-rating">
                                                     <i class="ecicon eci-star fill"></i>
                                                     <i class="ecicon eci-star fill"></i>
@@ -183,18 +193,30 @@
                                                         alt="Product" />
                                                 </a>
                                                 <span class="percentage">20%</span>
-                                                <a href="{{ route('detail', ['category_slug' => $item->category->slug, 'product_slug' => $item->slug]) }}"
-                                                    class="quickview" title="Quick view">
-                                                    <img src="frontend/assets/images/icons/quickview.svg" class="svg_img pro_svg" alt="" />
-                                                </a>
+                                                @if (isset($item) && isset($item->category))
+                                                    <a href="{{ route('detail', ['category_slug' => $item->category->slug, 'product_slug' => $item->slug]) }}"
+                                                        class="quickview" title="Quick view">
+                                                    </a>
+                                                @else
+                                                    <p class="text-gray-500">Tidak ada data tersedia.</p>
+                                                @endif
                                                 <div class="ec-pro-actions">
                                                     <a href="compare.html" class="ec-btn-group compare"
                                                         title="Compare"><img
                                                             src="frontend/assets/images/icons/compare.svg"
                                                             class="svg_img pro_svg" alt="" /></a>
-                                                            <button title="Add To Cart" class="add-to-cart" data-product-id="{{ $item->id }}">
-                                                                <img src="frontend/assets/images/icons/cart.svg" class="svg_img pro_svg" alt="" /> Add To Cart
-                                                            </button>
+                                                    @isset($item)
+                                                        <button title="Add To Cart" class="add-to-cart"
+                                                            data-product-id="{{ $item->id }}">
+                                                            <img src="frontend/assets/images/icons/cart.svg"
+                                                                class="svg_img pro_svg" alt="" /> Add To Cart
+                                                        </button>
+                                                    @else
+                                                        <button title="Add To Cart" class="add-to-cart disabled">
+                                                            <img src="frontend/assets/images/icons/cart.svg"
+                                                                class="svg_img pro_svg" alt="" /> Tidak Tersedia
+                                                        </button>
+                                                    @endisset
                                                     <a class="ec-btn-group wishlist" title="Wishlist"><img
                                                             src="frontend/assets/images/icons/wishlist.svg"
                                                             class="svg_img pro_svg" alt="" /></a>
@@ -1496,55 +1518,62 @@
         </div>
     </section>
     <script>
-        var isLoggedIn = @auth true @else false @endauth;
-    </script>  
+        var isLoggedIn = @auth true
+        @else
+            false
+        @endauth ;
+    </script>
     <!-- Ec Instagram End -->
     <script>
         document.querySelectorAll('.add-to-cart').forEach(button => {
-            button.addEventListener('click', function () {
+            button.addEventListener('click', function() {
                 const productId = this.dataset.productId;
-    
+
                 // Debugging: Periksa apakah productId ada
                 console.log("Product ID:", productId);
                 if (!productId) {
                     alert("Produk ID tidak ditemukan! Silakan refresh halaman.");
                     return;
                 }
-    
+
                 // Cek jika pengguna sudah login
                 if (isLoggedIn) {
                     const quantity = 1; // Default quantity
-    
+
                     fetch(`/cart/${productId}`, {
-                        method: 'POST',
-                        headers: {
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
-                            'Accept': 'application/json',
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify({ quantity }),
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            return response.text().then(text => {
-                                console.error("Response Error:", text);
-                                throw new Error(text);
-                            });
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        if (data.status === 'success') {
-                            document.querySelector('.cart-count-label').textContent = data.cart_count;
-                            alert(data.message);
-                        } else {
-                            alert('Gagal menambahkan produk ke keranjang: ' + (data.message || ''));
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Fetch Error:', error);
-                        alert('Terjadi kesalahan saat menambahkan ke cart!');
-                    });
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                    .getAttribute('content'),
+                                'Accept': 'application/json',
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                quantity
+                            }),
+                        })
+                        .then(response => {
+                            if (!response.ok) {
+                                return response.text().then(text => {
+                                    console.error("Response Error:", text);
+                                    throw new Error(text);
+                                });
+                            }
+                            return response.json();
+                        })
+                        .then(data => {
+                            if (data.status === 'success') {
+                                document.querySelector('.cart-count-label').textContent = data
+                                    .cart_count;
+                                alert(data.message);
+                            } else {
+                                alert('Gagal menambahkan produk ke keranjang: ' + (data.message || ''));
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Fetch Error:', error);
+                            alert('Terjadi kesalahan saat menambahkan ke cart!');
+                        });
                 } else {
                     // Jika belum login, arahkan ke halaman login
                     window.location.href = '/login';

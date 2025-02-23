@@ -97,7 +97,7 @@
                                 <img src="{{ asset('frontend/assets/images/icons/cart.svg') }}" class="svg_img header_svg" alt="Cart" />
                             </div>
                             <span class="ec-header-count cart-count-label">{{ session('cart_count', 0) }}</span>
-                        </a>                            
+                        </a>
                         <!-- Header Cart End -->
                         <!-- Header menu Start -->
                         <a href="#ec-mobile-menu" class="ec-header-btn ec-side-toggle d-lg-none">
@@ -154,6 +154,10 @@
                                     @endguest
                                     @auth
                                         <li><a class="dropdown-item" href="#">Profile</a></li>
+                                        @if(Auth::check() && Auth::user()->is_admin == 1)
+                                        {{-- <li><a class="dropdown-item" href="#">Admin Dashboard</a></li> --}}
+                                        <li><a href="{{ route('admin.dashboard') }}" class="dropdown-item">Admin Dashboard</a></li>
+                                        @endif
                                         <li>
                                             <a class="dropdown-item" href="{{ route('logout') }}"
                                             onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
@@ -179,7 +183,7 @@
                                     <img src="{{ asset('frontend/assets/images/icons/cart.svg') }}" class="svg_img header_svg" alt="Cart" />
                                 </div>
                                 <span class="ec-header-count cart-count-label">{{ session('cart_count', 0) }}</span>
-                            </a>                            
+                            </a>
                             <!-- Header Cart End -->
                         </div>
                     </div>

@@ -28,7 +28,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::post('/cart/{product_id}', [CartController::class, 'store'])->name('cart.store');
     Route::put('/cart', [CartController::class, 'update'])->name('cart.update');
-    Route::delete('/cart/{cart_id}', [CartController::class, 'destroy'])->name('cart.destroy');
+    Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
 });
 
 // Route untuk Admin dengan Middleware
