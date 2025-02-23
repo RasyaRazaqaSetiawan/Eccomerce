@@ -64,8 +64,8 @@
                                                         </td>
                                                         <td class="ec-cart-pro-qty" style="text-align: center;">
                                                             <div class="cart-qty-plus-minus">
-                                                                <input class="cart-plus-minus quantity" type="text"
-                                                                    value="{{ $cart_item->quantity }}" readonly />
+                                                                <input class="cart-plus-minus quantity" type="number" name="quantities[{{ $cart_item->id }}]"
+                                                                    value="{{ $cart_item->quantity }}" min="1" />
                                                             </div>
                                                         </td>
                                                         <td class="ec-cart-pro-subtotal">
@@ -88,6 +88,7 @@
                                                 style="display: flex; justify-content: space-between; align-items: center;">
                                                 <a href="{{ route('home') }}">Continue Shopping</a>
                                                 <div style="display: flex; gap: 10px;">
+                                                    <button type="submit" class="btn btn-primary">Update Cart</button>
                                                     <a href="#" class="btn btn-success">Go Checkout</a>
                                                 </div>
                                             </div>
@@ -107,17 +108,9 @@
                             <div class="ec-sb-block-content">
                                 <div class="ec-cart-summary-bottom">
                                     <div class="ec-cart-summary">
-                                        <div>
-                                            <span class="text-left">Sub-Total</span>
-                                            <span class="text-right cart-subtotal">Rp 0</span>
-                                        </div>
-                                        <div>
-                                            <span class="text-left">Delivery Charges & Taxes</span>
-                                            <span class="text-right">Rp 10.000</span>
-                                        </div>
                                         <div class="ec-cart-summary-total">
                                             <span class="text-left">Total Amount</span>
-                                            <span class="text-right cart-total">Rp 0</span>
+                                            <span class="text-right cart-total">Rp <span id="total-amount">0</span></span>
                                         </div>
                                     </div>
                                 </div>
@@ -130,30 +123,28 @@
         </div>
     </section>
 
-    <!-- Form DELETE untuk setiap item (DIPISAH DARI FORM UTAMA) -->
-    @foreach ($cart as $cart_item)
-        <form action="{{ route('cart.destroy', $cart_item->id) }}" method="POST"
-            class="delete-cart-form-{{ $cart_item->id }}">
-            @csrf
-            @method('DELETE')
-        </form>
-    @endforeach
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            function updateTotalAmount() {
+                let total = 0;
+                document.querySelectorAll(".subtotal").forEach(function(element) {
+                    total += parseInt(element.textContent.replace(/\D/g, ""));
+                });
+                document.getElementById("total-amount").textContent = total.toLocaleString("id-ID");
+            }
 
-@endsection
-
-@section('scripts')
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        document.querySelectorAll(".delete-cart-item").forEach((button) => {
-            button.addEventListener("click", function () {
-                let cartItemId = this.getAttribute("data-id");
-                let form = document.querySelector(".delete-cart-form-" + cartItemId);
-
-                if (confirm("Apakah Anda yakin ingin menghapus item ini dari keranjang?")) {
-                    form.submit();
-                }
+            document.querySelectorAll(".quantity").forEach(function(input) {
+                input.addEventListener("input", function() {
+                    let row = this.closest("tr");
+                    let price = parseInt(row.querySelector(".product-price").value);
+                    let quantity = parseInt(this.value);
+                    let subtotalElement = row.querySelector(".subtotal");
+                    subtotalElement.textContent = (price * quantity).toLocaleString("id-ID");
+                    updateTotalAmount();
+                });
             });
+
+            updateTotalAmount();
         });
-    });
-</script>
+    </script>
 @endsection

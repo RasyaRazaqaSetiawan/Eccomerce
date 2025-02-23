@@ -91,9 +91,11 @@
                                                     </a>
                                                     <span class="percentage">20%</span>
                                                     @if (isset($item) && isset($item->category))
-                                                        <a href="{{ route('detail', ['category_slug' => $item->category->slug, 'product_slug' => $item->slug]) }}"
-                                                            class="quickview" title="Quick view">
-                                                        </a>
+                                                    <a href="{{ route('detail', ['category_slug' => $item->category->slug, 'product_slug' => $item->slug]) }}"
+                                                        class="quickview" title="Quick view"><img
+                                                        src="frontend/assets/images/icons/quickview.svg"
+                                                        class="svg_img pro_svg" alt="" /> 
+                                                    </a>
                                                     @else
                                                         <p class="text-gray-500">Tidak ada data tersedia.</p>
                                                     @endif
@@ -194,9 +196,11 @@
                                                 </a>
                                                 <span class="percentage">20%</span>
                                                 @if (isset($item) && isset($item->category))
-                                                    <a href="{{ route('detail', ['category_slug' => $item->category->slug, 'product_slug' => $item->slug]) }}"
-                                                        class="quickview" title="Quick view">
-                                                    </a>
+                                                <a href="{{ route('detail', ['category_slug' => $item->category->slug, 'product_slug' => $item->slug]) }}"
+                                                    class="quickview" title="Quick view"><img
+                                                    src="frontend/assets/images/icons/quickview.svg"
+                                                    class="svg_img pro_svg" alt="" />
+                                                </a>
                                                 @else
                                                     <p class="text-gray-500">Tidak ada data tersedia.</p>
                                                 @endif
