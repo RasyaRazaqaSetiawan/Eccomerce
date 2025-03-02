@@ -1,6 +1,6 @@
 <header class="ec-header">
     <!--Ec Header Top Start -->
-    <div class="header-top">
+    {{-- <div class="header-top">
         <div class="container">
             <div class="row align-items-center">
                 <!-- Header Top social Start -->
@@ -109,10 +109,10 @@
                 <!-- Header Top responsive Action -->
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Ec Header Top  End -->
     <!-- Ec Header Bottom  Start -->
-    <div class="ec-header-bottom d-none d-lg-block">
+    <div class="ec-header-bottom d-none d-lg-block sticky-nav">
         <div class="container position-relative">
             <div class="row">
                 <div class="ec-flex">
@@ -128,14 +128,14 @@
                     <!-- Ec Header Logo End -->
 
                     <!-- Ec Header Search Start -->
-                    <div class="align-self-center">
+                    {{-- <div class="align-self-center">
                         <div class="header-search">
                             <form class="ec-btn-group-form" action="#">
                                 <input class="form-control" placeholder="Enter Your Product Name..." type="text">
                                 <button class="submit" type="submit"><img src="{{ asset('frontend/assets/images/icons/search.svg') }}" class="svg_img header_svg" alt="" /></button>
                             </form>
                         </div>
-                    </div>
+                    </div> --}}
                     <!-- Ec Header Search End -->
 
                     <!-- Ec Header Button Start -->
@@ -222,7 +222,7 @@
     </div>
     <!-- Header responsive Bottom  End -->
     <!-- EC Main Menu Start -->
-    <div id="ec-main-menu-desk" class="d-none d-lg-block sticky-nav">
+    {{-- <div id="ec-main-menu-desk" class="d-none d-lg-block sticky-nav">
         <div class="container position-relative">
             <div class="row">
                 <div class="col-md-12 align-self-center">
@@ -470,7 +470,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- Ec Main Menu End -->
     <!-- ekka Mobile Menu Start -->
     <div id="ec-mobile-menu" class="ec-side-cart ec-mobile-menu">

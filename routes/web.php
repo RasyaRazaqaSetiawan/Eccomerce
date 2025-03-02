@@ -6,6 +6,7 @@ use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ProductController;
 use App\Http\Middleware\IsAdmin;
 
@@ -29,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/cart/{product_id}', [CartController::class, 'store'])->name('cart.store');
     Route::put('/cart', [CartController::class, 'update'])->name('cart.update');
     Route::delete('/cart/{id}', [CartController::class, 'destroy'])->name('cart.destroy');
+    Route::get('/checkout', [CheckoutController::class, 'index']);
+    Route::post('/checkout/shipment', [CheckoutController::class, 'selectShipment']);
 });
 
 // Route untuk Admin dengan Middleware
