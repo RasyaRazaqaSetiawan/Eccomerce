@@ -172,9 +172,11 @@
                             </div>
                             <!-- Header User End -->
                             <!-- Header wishlist Start -->
-                            <a href="wishlist.html" class="ec-header-btn ec-header-wishlist">
-                                <div class="header-icon">  <img src="{{ asset('frontend/assets/images/icons/wishlist.svg') }}" class="svg_img header_svg" alt="Wishlist" /></div>
-                                <span class="ec-header-count">4</span>
+                            <a href="{{ route('transactions') }}" class="ec-header-btn ec-header-transactions">
+                                <div class="header-icon">
+                                    <i class="ecicon eci-credit-card text-primary fs-4"></i>
+                                </div>
+                                <span class="ec-header-count">{{ Auth::check() ? Auth::user()->transactions()->count() : 0 }}</span>
                             </a>
                             <!-- Header wishlist End -->
                             <!-- Header Cart Start -->

@@ -11,12 +11,10 @@
                             <h2 class="ec-breadcrumb-title">Checkout</h2>
                         </div>
                         <div class="col-md-6 col-sm-12">
-                            <!-- ec-breadcrumb-list start -->
                             <ul class="ec-breadcrumb-list">
                                 <li class="ec-breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
                                 <li class="ec-breadcrumb-item active">Checkout</li>
                             </ul>
-                            <!-- ec-breadcrumb-list end -->
                         </div>
                     </div>
                 </div>
@@ -30,7 +28,6 @@
         <div class="container">
             <div class="row">
                 <div class="ec-checkout-leftside col-lg-8 col-md-12">
-                    <!-- checkout content Start -->
                     <div class="ec-checkout-content">
                         @if(session('success'))
                             <div class="alert alert-success">
@@ -38,8 +35,10 @@
                             </div>
                         @endif
 
-                        <form action="{{ url('/checkout/shipment') }}" method="POST">
+                        <!-- Formulir Checkout -->
+                        <form action="{{ url('/checkout/process') }}" method="POST">
                             @csrf
+                            <!-- Pilihan Pengiriman -->
                             <div class="card shadow-sm">
                                 <div class="card-header bg-primary">
                                     <h5 class="mb-0 text-white">Shipping Method</h5>
@@ -65,18 +64,37 @@
                                 </div>
                             </div>
 
+                            <!-- Ringkasan Pesanan -->
+                            <div class="card mt-4 shadow-sm">
+                                <div class="card-header bg-secondary">
+                                    <h5 class="mb-0 text-white">Order Summary</h5>
+                                </div>
+                                <div class="card-body">
+                                    <ul class="list-group">
+                                        @foreach($cartItems as $item)
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                {{ $item->product->name }} (x{{ $item->quantity }})
+                                                <span>{{ number_format($item->product->price * $item->quantity, 0, ',', '.') }} IDR</span>
+                                            </li>
+                                        @endforeach
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <strong>Total</strong>
+                                            <strong id="totalAmount">{{ number_format($totalAmount, 0, ',', '.') }} IDR</strong>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
                             <button type="submit" class="btn btn-primary w-100 mt-4">
                                 Place Order
                             </button>
                         </form>
                     </div>
-                    <!-- checkout content End -->
                 </div>
 
-                <!-- Sidebar Area Start -->
+                <!-- Sidebar -->
                 <div class="ec-checkout-rightside col-lg-4 col-md-12">
                     <div class="ec-sidebar-wrap">
-                        <!-- Sidebar Summary Block -->
                         <div class="ec-sidebar-block">
                             <div class="ec-sb-title">
                                 <h3 class="ec-sidebar-title">Summary</h3>
@@ -85,7 +103,7 @@
                                 <div class="ec-checkout-summary">
                                     <div class="ec-checkout-summary-total">
                                         <span class="text-left">Total Amount</span>
-                                        <span class="text-right">{{ number_format($totalAmount, 0, ',', '.') }} IDR</span>
+                                        <span class="text-right" id="finalTotal">{{ number_format($totalAmount, 0, ',', '.') }} IDR</span>
                                     </div>
                                 </div>
                                 <div class="ec-checkout-pro">
@@ -116,10 +134,28 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- Sidebar Summary Block -->
                     </div>
                 </div>
+                <!-- Sidebar End -->
             </div>
         </div>
     </section>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const shippingOptions = document.querySelectorAll("input[name='shipping_method']");
+            const totalAmountEl = document.getElementById("totalAmount");
+            const finalTotalEl = document.getElementById("finalTotal");
+            let baseTotal = {{ $totalAmount }};
+
+            shippingOptions.forEach(option => {
+                option.addEventListener("change", function() {
+                    let shippingCost = parseInt(this.closest("li").querySelector(".text-muted").textContent.replace(/\D/g, '')) || 0;
+                    let finalTotal = baseTotal + shippingCost;
+                    totalAmountEl.textContent = new Intl.NumberFormat('id-ID').format(finalTotal) + " IDR";
+                    finalTotalEl.textContent = new Intl.NumberFormat('id-ID').format(finalTotal) + " IDR";
+                });
+            });
+        });
+    </script>
 @endsection

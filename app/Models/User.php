@@ -66,5 +66,8 @@ class User extends Authenticatable
             ? asset('storage/' . $this->attributes['profile_image'])
             : asset('backend/assets/media/avatars/blank.png');
     }
-
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }
