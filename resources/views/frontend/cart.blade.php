@@ -89,7 +89,7 @@
                                                 <a href="{{ route('home') }}">Continue Shopping</a>
                                                 <div style="display: flex; gap: 10px;">
                                                     <button type="submit" class="btn btn-primary">Update Cart</button>
-                                                    <a href="#" class="btn btn-success">Go Checkout</a>
+                                                    <a href="{{url('/checkout')}}" class="btn btn-success">Go Checkout</a>
                                                 </div>
                                             </div>
                                         </div>

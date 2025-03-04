@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
@@ -14,8 +16,16 @@ class CheckoutController extends Controller
             ['id' => 3, 'name' => 'Same Day Delivery', 'price' => 50000, 'estimated' => 'Same Day', 'icon' => 'eci-bicycle'],
         ];
 
-        return view('frontend.checkout', compact('shippingMethods'));
+        $cartItems = Cart::where('user_id', Auth::id())->with('product')->get();
+
+        $totalAmount = $cartItems->sum(function($item) {
+            return $item->product->price * $item->quantity;
+        });
+
+
+        return view('frontend.checkout', compact('shippingMethods', 'cartItems','totalAmount'));
     }
+
 
     public function selectShipment(Request $request)
     {
