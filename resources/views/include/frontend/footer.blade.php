@@ -23,8 +23,8 @@
                             <h4 class="ec-footer-heading">Contact us</h4>
                             <div class="ec-footer-links">
                                 <ul class="align-items-center">
-                                    <li class="ec-footer-link">71 Pilgrim Avenue Chevy Chase, east California.</li>
-                                    <li class="ec-footer-link"><span>Call Us:</span><a href="tel:+440123456789">+44 0123 456 789</a></li>
+                                    <li class="ec-footer-link">Smk Assalaam Bandung</li>
+                                    <li class="ec-footer-link"><span>Call Us:</span><a href="tel:+440123456789">+08 213 312 341</a></li>
                                     <li class="ec-footer-link"><span>Email:</span><a href="mailto:example@ec-email.com">example@ec-email.com</a></li>
                                 </ul>
                             </div>
@@ -49,7 +49,7 @@
                             <div class="ec-footer-links">
                                 <ul class="align-items-center">
                                     <li class="ec-footer-link"><a href="user-profile.html">My Account</a></li>
-                                    <li class="ec-footer-link"><a href="track-order.html">Order History</a></li>
+                                    <li class="ec-footer-link"><a href="{{route('transactions')}}">Order History</a></li>
                                     <li class="ec-footer-link"><a href="wishlist.html">Wish List</a></li>
                                     <li class="ec-footer-link"><a href="offer.html">Specials</a></li>
                                 </ul>
@@ -61,7 +61,7 @@
                             <h4 class="ec-footer-heading">Services</h4>
                             <div class="ec-footer-links">
                                 <ul class="align-items-center">
-                                    <li class="ec-footer-link"><a href="track-order.html">Discount Returns</a></li>
+                                    <li class="ec-footer-link"><a href="{{route('transactions')}}">Discount Returns</a></li>
                                     <li class="ec-footer-link"><a href="privacy-policy.html">Policy & policy</a></li>
                                     <li class="ec-footer-link"><a href="terms-condition.html">Customer Service</a></li>
                                     <li class="ec-footer-link"><a href="terms-condition.html">Term & condition</a></li>
@@ -69,7 +69,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-12 col-lg-3 ec-footer-news">
+                    {{-- <div class="col-sm-12 col-lg-3 ec-footer-news">
                         <div class="ec-footer-widget">
                             <h4 class="ec-footer-heading">Newsletter</h4>
                             <div class="ec-footer-links">
@@ -88,7 +88,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -111,7 +111,7 @@
                     <!-- Footer Copyright Start -->
                     <div class="col text-center footer-copy">
                         <div class="footer-bottom-copy ">
-                            <div class="ec-copy">Copyright © 2021-2022 <a class="site-name text-upper" href="#">ekka<span>.</span></a>. All Rights Reserved</div>
+                            <div class="ec-copy">Copyright © 2025 <a class="site-name text-upper" href="#">MarketOne<span>.</span></a>. All Rights Reserved</div>
                         </div>
                     </div>
                     <!-- Footer Copyright End -->

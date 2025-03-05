@@ -120,7 +120,7 @@
                     <div class="align-self-center">
                         <div class="header-logo">
                             <a href="{{ url('/') }}">
-                                <img src="{{ asset('frontend/assets/images/logo/logo.png') }}" alt="Site Logo" />
+                                <img src="{{ asset('frontend/assets/images/logo/logo.png') }}" alt="Site Logo" width="120" />
                                 <img class="dark-logo" src="{{ asset('frontend/assets/images/logo/dark-logo.png') }}" alt="Site Logo" style="display: none;" />
                             </a>
                         </div>
@@ -224,7 +224,7 @@
     </div>
     <!-- Header responsive Bottom  End -->
     <!-- EC Main Menu Start -->
-    {{-- <div id="ec-main-menu-desk" class="d-none d-lg-block sticky-nav">
+    <div id="ec-main-menu-desk" class="d-none d-lg-block sticky-nav">
         <div class="container position-relative">
             <div class="row">
                 <div class="col-md-12 align-self-center">
@@ -472,7 +472,7 @@
                 </div>
             </div>
         </div>
-    </div> --}}
+    </div>
     <!-- Ec Main Menu End -->
     <!-- ekka Mobile Menu Start -->
     <div id="ec-mobile-menu" class="ec-side-cart ec-mobile-menu">
@@ -486,10 +486,6 @@
                     <li><a href="javascript:void(0)">Home</a>
                         <ul class="sub-menu">
                             <li><a href="index.html">Fashion 1</a></li>
-
-
-
-
                         </ul>
                     </li>
 
